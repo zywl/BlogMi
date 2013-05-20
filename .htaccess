@@ -1,5 +1,5 @@
 RewriteEngine On
 RewriteBase /
 
-RewriteCond $1 !^(index\.php|files|sitemap\.xml|robots\.txt|image|css|js)
+RewriteCond $1 !^(index\.php|admin|files|sitemap\.xml|robots\.txt)
 RewriteRule ^(.*)$ /index.php?$1
