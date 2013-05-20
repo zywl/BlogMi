@@ -12,7 +12,7 @@
   <div id="header">
     <div id="toolbar">
     <div id="sitename"><a href="<?php mc_site_link(); ?>"><?php mc_site_name(); ?></a><br /><span><?php mc_site_desc(); ?></span></div>
-    <div id="navbar"><a href="<?php mc_site_link(); ?>/" class="home" title="首页">首页</a><a href="<?php mc_site_link(); ?>/?archive/" class="archive" title="文章存档">文章存档</a><a href="<?php mc_site_link(); ?>/?contact/" class="contact" title="联系方式">联系方式</a><a href="<?php mc_site_link(); ?>/?rss/" class="rss" title="RSS订阅" target="_blank">RSS订阅</a></div>
+    <div id="navbar"><a href="<?php mc_site_link(); ?>/" class="home" title="首页">首页</a><a href="<?php mc_site_link(); ?>/archive/" class="archive" title="文章存档">文章存档</a><a href="<?php mc_site_link(); ?>/contact/" class="contact" title="联系方式">联系方式</a><a href="<?php mc_site_link(); ?>/rss/" class="rss" title="RSS订阅" target="_blank">RSS订阅</a></div>
     </div>
     <a href="<?php mc_site_link(); ?>"><div id="photo-container"> <img src="<?php mc_theme_url('photo.jpg'); ?>" width="230px" height="230px"><div id="photo-frame"></div></div></a>
   </div>

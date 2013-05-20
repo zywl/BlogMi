@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteCond $1 !^(index\.php|files|sitemap\.xml|robots\.txt|image|css|js)
+RewriteRule ^(.*)$ /index.php?$1
