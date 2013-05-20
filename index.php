@@ -2,7 +2,7 @@
 require_once dirname(__FILE__).'/files/core.php';
 $mc_post_per_page = 2;
 $qs = $_SERVER['QUERY_STRING'];
-if (preg_match('|^post/([a-z0-5]{6})$|', $qs, $matches)) {
+if (preg_match('|^post/(.*)$|', $qs, $matches)) {
   $mc_get_type = 'post';
   $mc_get_name = $matches[1];
 }

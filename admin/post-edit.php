@@ -15,7 +15,8 @@ if (isset($_POST['_IS_POST_BACK_'])) {
   $post_state       = $_POST['state'];
   $post_title       = trim($_POST['title']);
   $post_content     = get_magic_quotes_gpc() ? stripslashes(trim($_POST['content'])) : trim($_POST['content']);
-  $post_tags        = explode(',', trim($_POST['tags']));
+  if ($_POST['tags'] != '在此输入标签，多个标签用英语逗号(,)分隔')
+    $post_tags      = explode(',', trim($_POST['tags']));
   $post_date        = date("Y-m-d");
   $post_time        = date("H:i:s");
   $post_can_comment  = $_POST['can_comment'];
@@ -45,7 +46,8 @@ if (isset($_POST['_IS_POST_BACK_'])) {
     $error_msg = '文章标题不能为空';
   }
   else {
-    if ($post_id == '') {
+    $file_path = '../files/posts/data/'.$post_id.'.dat';
+    if ($post_id == '在此输入文章URL') {
       $file_names = shorturl($post_title);
       foreach ($file_names as $file_name) {
         $file_path = '../files/posts/data/'.$file_name.'.dat';
@@ -54,9 +56,7 @@ if (isset($_POST['_IS_POST_BACK_'])) {
           break;
         }
       }
-    }
-    else {
-      $file_path = '../files/posts/data/'.$post_id.'.dat';
+    } elseif ($post_id != '' && file_exists($file_path)) {
       $data = unserialize(file_get_contents($file_path));
       $post_old_state = $data['state'];
       if ($post_old_state != $post_state) {
@@ -75,7 +75,7 @@ if (isset($_POST['_IS_POST_BACK_'])) {
       'tags'        => $post_tags,
       'date'        => $post_date,
       'time'        => $post_time,
-      'can_comment'  => $post_can_comment,
+      'can_comment' => $post_can_comment,
     );
     $index_file = '../files/posts/index/'.$post_state.'.php';
     require $index_file;
@@ -132,9 +132,17 @@ function empty_textbox_blur(target) {
     <input name="title" type="text" class="edit_textbox" value="<?php
     if ($post_title == "") {
       echo '在此输入标题" " style="color:#888;" onfocus="empty_textbox_focus(this)" onblur="empty_textbox_blur(this)';
-    }
-    else {
+    } else {
       echo htmlspecialchars($post_title);
+    }
+    ?>"/>
+  </div>
+  <div style="margin-bottom:20px;">
+    <input name="id" type="text" class="edit_textbox" value="<?php
+    if ($post_id == "") {
+      echo '在此输入文章URL" " style="color:#888;" onfocus="empty_textbox_focus(this)" onblur="empty_textbox_blur(this)';
+    } else {
+      echo htmlspecialchars($post_id);
     }
     ?>"/>
   </div>
@@ -219,7 +227,6 @@ function empty_textbox_blur(target) {
     <div style="clear:both;"></div>
   </div>
   <div style="text-align:right">
-    <input type="hidden" name="id" value="<?php echo $post_id; ?>"/>
     <input type="submit" name="save" value="保存" style="padding:6px 20px;"/>
   </div>
 </form>
